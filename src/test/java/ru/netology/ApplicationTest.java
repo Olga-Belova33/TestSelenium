@@ -1,6 +1,6 @@
 package ru.netology;
 
-
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +19,7 @@ public class ApplicationTest {
 
     @BeforeAll
     static void setUpAll() {
-        WebDriverManager.chromedriver().setup();
+      WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
@@ -44,8 +43,8 @@ public class ApplicationTest {
     @Test
     void shouldTestSomething() throws InterruptedException {
 
-        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Петров Петр");
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+89209756316");
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Петров Петр Петрович");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+89009756316");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector("button.button")).click();
         WebElement actualTextElement = driver.findElement(By.cssSelector("[data-test-id=order-success]"));
