@@ -17,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ApplicationTest {
     private WebDriver driver;
 
-    @BeforeAll
-    static void setUpAll() {
-      WebDriverManager.chromedriver().setup();
+   @BeforeAll
+   public static void setUpAll() {
+   WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
-    void setUP() {
+    public void beforeEach() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
@@ -35,22 +35,21 @@ public class ApplicationTest {
     }
 
     @AfterEach
-    void tearDown() {
+    public void afterEach() {
         driver.quit();
         driver = null;
     }
 
     @Test
-    void shouldTestSomething() throws InterruptedException {
+    public void shouldBeSuccessfulForm() {
 
         driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Петров Петр Петрович");
-        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+89009756316");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79009756316");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector("button.button")).click();
         WebElement actualTextElement = driver.findElement(By.cssSelector("[data-test-id=order-success]"));
         String actualText = actualTextElement.getText().trim();
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", actualText);
         assertTrue(actualTextElement.isDisplayed());
-        Thread.sleep(5000);
     }
 }
